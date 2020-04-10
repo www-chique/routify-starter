@@ -10,6 +10,6 @@
     }
   ],
   "functions": {
-    "scripts/now/api/ssr.js": { "runtime": "now-node@12.x" }
+    "scripts/now/api/ssr.js": { "runtime": "now-node@12.0.0" }
   }
 }
