@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy'
 import del from 'del'
 import replace from '@rollup/plugin-replace';
@@ -56,7 +57,7 @@ function baseConfig(config, ctx) {
     const _rollupConfig = {
         inlineDynamicImports: !dynamicImports,
         preserveEntrySignatures: false,
-        input: `src/main.js`,
+        input: 'src/main.ts',
         output: {
             name: 'routify_app',
             sourcemap: true,
@@ -79,6 +80,7 @@ function baseConfig(config, ctx) {
                 dedupe: importee => !!importee.match(/svelte(\/|$)/)
             }),
             commonjs(),
+			typescript({ sourceMap: !production }),
 
             production && terser(), // minify
             !production && isNollup && Hmr({ inMemory: true, public: staticDir, }), // refresh only updated code
